@@ -9,12 +9,12 @@ inquirer
         {
             type: 'input',
             name: 'manager_name',
-            message: 'Manager Name?',
+            message: 'Manager Name.',
         },
         {
             type: 'input',
             name: 'employee_id',
-            message: 'Enter employee ID?',
+            message: 'Enter employee ID.',
         },
         {
             type: 'input',
@@ -23,40 +23,59 @@ inquirer
         },
         {
             type: 'input',
-            name: 'office_number',
-            message: 'Enter office phone number?',
+            name: 'officenum',
+            message: 'Enter office phone number',
         },
-        {
-            type: 'input',
-            name: 'trigger_engineer',
-            message: 'Would you like to add an engineer?',
-        },
-
-        // Engineer Questions - stopped here for the night
+        // End of Manager Question
         {
             type: 'list',
-            name: 'license',
-            choices: ["BSD", "MIT", "GPL", "Mozilla", "Apache", "Boost", "The Unlicense"]
+            name: 'More Team Members?',
+            choices: ["Engineer", "Intern", "The team is complete."]
+        },
+        {
+            type: "input",
+            name: "engin_name",
+            message: "Enter engineer's name."
         },
         {
             type: 'input',
-            name: 'contribution',
-            message: 'What are your contribution guidelines?',
+            name: 'engin_id',
+            message: 'Enter engineers ID.',
         },
         {
             type: 'input',
-            name: 'test',
-            message: 'What are your testing requirements?',
+            name: 'engin_email',
+            message: 'Enter engineers email.',
         },
         {
             type: 'input',
             name: 'github',
-            message: 'Enter your GitHub Username',
+            message: 'Enter engineer github username.',
+        },
+        {
+            type: 'confirm',
+            name: 'Add and Intern ?',
+            choices: ["yes", "no"]
+        },
+        {
+            type: "input",
+            name: "intern_name",
+            message: "Enter intern's name.",
         },
         {
             type: 'input',
-            name: 'questions',
-            message: 'Enter your email for additional questions',
+            name: 'itern_id',
+            message: 'Enter intern ID.',
+        },
+        {
+            type: 'input',
+            name: 'intern_email',
+            message: 'Enter intern email.',
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What's the school the intern is enrolled in ?",
         },
     ])
 
@@ -76,27 +95,70 @@ inquirer
         }
     });
 // below -  generation of the html file with the information populate from the information input in the command line.
-const generateHtml = ({ title, description, installation, usage, license, contribution, test, github, questions }) =>
+const generateHtml = ({ manager_name, employee_id, email, officenum, engin_name, engin_id, engin_email, github, intern_name, intern_id, intern_email, school }) =>
     `<!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>My Team</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    </head>
-    
-    <body>
-        <nav class="navbar navbar-expand-lg bg-light">
-        <div class="card" style="width: 18rem;">
-<div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Test</a>
-</div>
-</div>
-    </body
-    </html>`
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Team</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="hero is-primary has-text-centered">
+    <div class="hero-body">
+      <p class="title">
+        My Team
+      </p>
+    </div>
+  </section>
+          <div class="columns is-mobile">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                      <div class="content">
+                        <h1 class="title is-3">Manager</h1>
+                    <h1 class="title is-4">${manager_name}</h1> 
+                    <ul>
+                        <li>Employee ID:${employee_id}</li>
+                        <li>Email Address: ${email}</li>
+                        <li>Office #:${officenum}</li>
+                    </ul>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                      <div class="content">
+                        <h1 class="title is-3">Engineer</h1>
+                    <h1 class="title is-4">${engin_name}</h1> 
+                    <ul>
+                        <li>Employee ID:${engin_id}</li>
+                        <li>Email Address: ${engin_email}</li>
+                        <li>www.github.com/${github}</li>
+                    </ul>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                      <div class="content">
+                        <h1 class="title is-3">Intern</h1>
+                    <h1 class="title is-4">${intern_name}</h1> 
+                    <ul>
+                        <li>Employee ID:${intern_id}</li>
+                        <li>Email Address: ${intern_email}</li>
+                        <li>School Name:${school}</li>
+                    </ul>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+</html>`
